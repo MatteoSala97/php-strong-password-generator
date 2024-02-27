@@ -1,26 +1,6 @@
-<?php
-    $lettersLowercase = 'abcdefghijklmnopqrstuvwxyz';
-    $lettersUppercase ='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $numbers = '0123456789';
-    $symbols = '!@#$%&?';
-
-    $validChars = $lettersLowercase . $lettersUppercase . $numbers . $symbols;
-    $newPass = '';
-
-    // General function waiting to be called with the right parameters
-    function generatePassword($characters, $length){
-        $pass= '';
-        $charLength = strlen($characters); 
-        for($i = 0; $i < $length; $i++){
-            $pass .= $characters[rand(0, $charLength - 1)];
-        }   
-        return $pass;
-    }
-
-    if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['password_length'])){
-        $passwordLength = $_GET['password_length'];
-        $newPass = generatePassword($validChars, $passwordLength);
-    }
+<?
+session_start();
+    include 'functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +39,7 @@
                     <p>
                         Lunghezza password: 
                     </p>
-                    <form method="GET" class="d-flex">
+                    <form method="GET" class="d-flex" action="landingPage.php">
                         <div class="col">
                             <div class="mb-3">
                                 <input type="number" 
@@ -107,10 +87,10 @@
                         </div>
                     </form>
                 </div>
-                <?php
-                    echo '<p>Your brand new generated password is: ' . $newPass . '</p>'
+                <!-- <?php
+                    echo '<p>Your new password is: ' . $newPass . '</p>';
                 ?>
-            </div>
+            </div> -->
         </div>
     </main>
 </body>

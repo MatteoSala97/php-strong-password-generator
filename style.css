@@ -20,7 +20,7 @@ body{
 }
 
 #main-container{
-    height: 700px;
+    min-height: 500px;
     background-color: rgb(140, 174, 249);
     border: 2px solid rgb(255, 0, 0);
     border-radius: 20px;
@@ -31,11 +31,23 @@ body{
 
 .button-group{
     position: absolute;
-    bottom: 40%;
-    right: 40%;
+    bottom: 20%;
+    right: 45%;
 }
 
 #reset_button a{
     text-decoration: none;
     color: #ffffff;
+}
+
+
+#landing-container{
+    min-height: 100px;
+    width: 300px;
+    background-color: rgb(140, 174, 249);
+    border: 2px solid rgb(255, 0, 0);
+    border-radius: 20px;
+    font-weight: 700; 
+    color: white;
+    margin: auto;
 }
