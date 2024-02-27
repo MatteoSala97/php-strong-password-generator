@@ -16,4 +16,26 @@ Ex-ex-large     xxl         ≥1400px
 
 body{
     background-color: #001632;
+    color: white;
+}
+
+#main-container{
+    height: 700px;
+    background-color: rgb(140, 174, 249);
+    border: 2px solid rgb(255, 0, 0);
+    border-radius: 20px;
+    font-weight: 700; 
+    color: white;
+    position: relative;
+}
+
+.button-group{
+    position: absolute;
+    bottom: 40%;
+    right: 40%;
+}
+
+#reset_button a{
+    text-decoration: none;
+    color: #ffffff;
 }

@@ -1,13 +1,34 @@
-<?
+<?php
+    $lettersLowercase = 'abcdefghijklmnopqrstuvwxyz';
+    $lettersUppercase ='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $numbers = '0123456789';
+    $symbols = '!@#$%&?';
 
+    $validChars = $lettersLowercase . $lettersUppercase . $numbers . $symbols;
+    $newPass = '';
+
+    // General function waiting to be called with the right parameters
+    function generatePassword($characters, $length){
+        $pass= '';
+        $charLength = strlen($characters); 
+        for($i = 0; $i < $length; $i++){
+            $pass .= $characters[rand(0, $charLength - 1)];
+        }   
+        return $pass;
+    }
+
+    if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['password_length'])){
+        $passwordLength = $_GET['password_length'];
+        $newPass = generatePassword($validChars, $passwordLength);
+    }
 ?>
 
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="5">
+    <!-- <meta http-equiv="refresh" content="3"> -->
     <title>Strong Password Generator</title>
 
     <!-- Boostrap CSS -->
@@ -26,14 +47,72 @@
     <header>
         <div class="container mt-5 text-center">
             <h1>Strong Password Generator</h1>
-            <h5>A stronger and more reliable password generator than what we've previously created</h5>
+            <h5>A stronger and more reliable password generator than what we've previously created 
+                <i class="fa-regular fa-face-smile-wink"></i>
+            </h5>
         </div>
     </header>
-
     <main>
-        <div>
-
+        <div class="container mt-5" id="main-container">
+            <div class="d-flex flex-column align-items-center">
+                <div class="d-flex gap-5 align-items-center mt-3">
+                    <p>
+                        Lunghezza password: 
+                    </p>
+                    <form method="GET" class="d-flex">
+                        <div class="col">
+                            <div class="mb-3">
+                                <input type="number" 
+                                name="password_length" 
+                                id="password_length" 
+                                class="form-control" 
+                                value="" 
+                                min="1">
+                            </div>
+                        </div>
+                        <div class="button-group d-flex gap-2">
+                            <button type="submit" class="btn btn-primary" name="submit">
+                                Generate
+                            </button>
+                            <button type="reset" class="btn btn-danger" id="reset_button">
+                                <a href="http://localhost:8888/php-strong-password-generator/">Reset</a>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="d-flex gap-5 align-items-center mt-3">
+                    <p>
+                        Consenti ripetizioni di uno o più caratteri: 
+                    </p>
+                    <form class="d-flex">
+                        <div class="col">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" 
+                                    type="radio" 
+                                    name="permission" 
+                                    id="permission_yes" 
+                                    value="yes">
+                                    <label class="form-check-label" for="permission_yes"> Yes </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" 
+                                    type="radio" 
+                                    name="permission" 
+                                    id="permission_no" 
+                                    value="no">
+                                    <label class="form-check-label" for="permission_no"> No </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <?php
+                    echo '<p>Your brand new generated password is: ' . $newPass . '</p>'
+                ?>
+            </div>
         </div>
     </main>
 </body>
 </html>
+
